@@ -6,7 +6,9 @@
 
 1、注册一个docker-hub账号
 - https://app.docker.com/
+
 2、编写GitHub Actions workflows工作流文件
+
 ```yaml
 name: Docker镜像构建和发布
 
@@ -77,6 +79,7 @@ jobs:
           echo "   - ${{ env.DOCKER_REPOSITORY }}:$VERSION"
 
 ```
+
 变量说明：
 
 - DOCKER_REPOSITORY: <docker-hub用户名/镜像名>
