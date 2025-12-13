@@ -5,9 +5,19 @@
 ## 教程
 
 1、注册一个docker-hub账号
+
 - https://app.docker.com/
 
-2、编写GitHub Actions workflows工作流文件
+2、生成access token用于docker hub登录认证
+
+![img.png](doc/img.png)
+
+3、demo工程结构如下
+工作流文件放到`.github/workflows/`目录里。
+
+![img_1.png](doc/img_1.png)
+
+4、编写GitHub Actions workflows工作流文件
 
 ```yaml
 name: Docker镜像构建和发布
@@ -86,7 +96,11 @@ jobs:
 - DOCKER_USERNAME：docker-hub用户名
 - DOCKER_PASSWORD：docker-hub access-token
 
-3、编写Dockerfile文件
+5、docker-hub中的access token等私密信息需要存储到GitHub中，通过` ${{ secrets.<Name> }}`引用。
+
+![img_2.png](doc/img_2.png)
+
+6、编写Dockerfile文件
 
 ```properties
 FROM eclipse-temurin:8-jdk-alpine
@@ -95,7 +109,16 @@ COPY target/gdcd-0.1.0.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
+
 ---
+
+7、将上述所有新增内容提交到GitHub后，创建tag并推送。点击Actions查看工作流运行情况。
+
+![img_3.png](doc/img_3.png)
+
+8、docker-hub查看结果
+
+![img.png](img.png)
 
 ## 🪧
 
